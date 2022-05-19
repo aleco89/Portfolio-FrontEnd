@@ -1,0 +1,30 @@
+.navbar-text{
+    color: white;
+}
+
+.nav-link{
+    font-size: 1.5rem;
+}
+
+.foto-perfil{
+    position: relative;
+    display: inline-block; 
+    border-radius: 50%;
+    border: 5px solid #fff;
+    margin-top: -6rem;
+}
+.footer-aboutme{
+    font-size: 20px;
+}
+.border-top-half{
+    border-top: 3px solid black !important; 
+    width: 45px;
+
+}
+
+.border-top{
+    border-top: 3px solid #dee2e6 !important;    
+}
+.progress-bar {
+    background-color: grey;
+}
