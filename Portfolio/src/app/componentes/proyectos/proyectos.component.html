@@ -1,0 +1,119 @@
+<div class="row mt-4">
+    <div class="col-lg-2">
+        <div class="border-top-half"></div>
+        <h3>Proyectos</h3>        
+        <button type="button" class="btn btn-light" data-bs-toggle="modal" *ngIf="isLogged" data-bs-target="#proyModal">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+    </div>     
+    <div class="col-lg-10 border-top">       
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+          <div class="col"*ngFor="let Proyecto of proyecto">
+            <div class="card my-1 h-100" >
+              <img src="{{Proyecto.foto}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{Proyecto.nombre}}</h5>
+                <p class="card-text">{{Proyecto.descripcion}}</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Comitente: {{Proyecto.comitente}}</small>
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#proyModalDelete" (click)="onDeleteModal(Proyecto.id!)">
+                  <i class="fa-solid fa-xmark m-2"></i>
+                </button>
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#proyModalEdit" (click)="onEditModal(Proyecto.id!)">
+                  <i class="fa-solid fa-pencil m-2"></i>
+                </button> 
+              </div>
+            </div>
+          </div>       
+        </div>          
+    </div>
+</div> 
+
+
+<!--Modal AGREGAR-->
+<div class="modal fade" id="proyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="nuevoProyecto">Agregar un nuevo proyecto</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>                     
+          <div class="modal-body">                   
+              <form [formGroup]="form" class="m-2" (ngSubmit)="onAdd()" novalidate #addF="ngForm"> 
+                  <div class="mb-3">
+                  <label for="nombre" class="form-label" >Nombre</label>
+                  <input type="text" formControlName="nombre" class="form-control" id="nombre" name="nombre" placeholder="Ej: Vivienda familiar" [(ngModel)]="nombre" >                                             
+                  </div>
+                  <div class="mb-3">
+                  <label for="comitente" class="form-label" >Comitente</label>
+                  <input type="text" formControlName="comitente" class="form-control" id="comitente" name="comitente" placeholder="Ej: Un comitente" [(ngModel)]="comitente">                                                     
+                  </div> 
+                  <div class="mb-3">
+                      <label for="descripcion" class="form-label" >Descripción del proyecto</label>
+                      <textarea type="text" formControlName="descripcion" class="form-control" id="descripcion" name="descripcion" placeholder="Ej: Proyecto, y dirección de vivienda familiar" [(ngModel)]="descripcion"></textarea>                                                     
+                  </div>                  
+                  <div class="mb-3">
+                      <label for="foto" class="form-label" >Url de una foto del proyecto</label>
+                      <input type="text" formControlName="foto" class="form-control" id="foto" name="urlFoto" placeholder="Ej: http://logo.com" [(ngModel)]="foto">                                                     
+                  </div>                       
+                  <div class="modal-footer">
+                      <button type="submit" class="btn btn-dark" [disabled]="form.invalid" data-bs-dismiss="modal">Guardar</button>
+                  </div>
+              </form> 
+          </div>
+      </div>
+  </div>
+</div> 
+<!--MODAL EDITAR-->
+<div class="modal fade" id="proyModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="editarproyecto">Editar proyecto</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>                     
+          <div class="modal-body">                   
+              <form [formGroup]="form" class="m-2" (ngSubmit)="onUpdate()" novalidate #editF="ngForm"> 
+                  <div class="mb-3">
+                    <label for="nombre" class="form-label" >Nombre</label>
+                    <input type="text" formControlName="nombre" class="form-control" id="nombre" name="nombre" placeholder="Ej: Vivienda familiar" [(ngModel)]="toEdit.nombre" >                                             
+                  </div>
+                  <div class="mb-3">
+                    <label for="comitente" class="form-label" >Comitente</label>
+                    <input type="text" formControlName="comitente" class="form-control" id="comitente" name="comitente" placeholder="Ej: Un comitente" [(ngModel)]="toEdit.comitente">                                                     
+                  </div> 
+                  <div class="mb-3">
+                      <label for="descripcion" class="form-label" >Descripción del proyecto</label>
+                      <textarea type="text" formControlName="descripcion" class="form-control" id="descripcion" name="descripcion" placeholder="Ej: Confección de proyectos, dirección de obra, etc" [(ngModel)]="toEdit.descripcion"></textarea>                                                     
+                  </div>                  
+                  <div class="mb-3">
+                      <label for="foto" class="form-label" >Url de una foto del proyecto</label>
+                      <input type="text" formControlName="foto" class="form-control" id="foto" name="foto" placeholder="Ej: http://logo.com" [(ngModel)]="toEdit.foto">                                                     
+                  </div>                       
+                  <div class="modal-footer">
+                      <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Guardar</button>
+                  </div>
+              </form> 
+          </div>
+      </div>
+  </div>
+</div> 
+<!--MODAL ELIMINAR -->  
+<div class="modal fade" id="proyModalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="eliminarProyecto">Desea eliminar el proyecto {{toDelete.nombre}}?</h5>        
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div> 
+      <div class="modal-body">
+          Atención! no podrás deshacerlo una vez que se haya borrado.
+        </div>               
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-dark" (click)="onDelete(toDelete.id!)" data-bs-dismiss="modal">Eliminar {{toDelete.nombre}}</button>
+      </div>
+    </div>
+  </div>
+</div> 

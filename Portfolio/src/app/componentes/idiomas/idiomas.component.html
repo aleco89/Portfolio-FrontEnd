@@ -1,0 +1,94 @@
+<div class="row mt-5">
+    <div class="col-lg-2">
+        <div class="border-top-half"></div>
+        <h3>Idiomas</h3>
+        <button type="button" class="btn btn-light" data-bs-toggle="modal" *ngIf="isLogged" data-bs-target="#idiModalAdd">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+    </div>
+    <div class="col-lg-10 border-top">
+        <div class="row container" *ngFor="let Idioma of idiomas">
+            <div class="text-end">
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#idiModalDelete" *ngIf="isLogged" (click)="onDeleteModal(Idioma.id!)">
+                    <i class="fa-solid fa-xmark m-2"></i>
+                </button>
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#idiModalEdit" *ngIf="isLogged" (click)="onEditModal(Idioma.id!)">
+                    <i class="fa-solid fa-pencil m-2"></i>
+                </button>  
+            </div>             
+            <h5>{{Idioma.idioma}}</h5>    
+            <P>{{Idioma.nivel}}</P>             
+        </div>        
+    </div> 
+</div>
+
+<!--MODAL AGREGAR -->
+<div class="modal fade" id="idiModalAdd" tabindex="-1" aria-labelledby="addModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nuevaexperiencia">Agregar nueva experiencia</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>                     
+            <div class="modal-body">                   
+                <form [formGroup]="form" class="m-2" (ngSubmit)="onAdd()" novalidate #addF="ngForm"> 
+                    <div class="mb-3">
+                    <label for="idioma" class="form-label" >Idioma</label>
+                    <input type="text" formControlName="idioma" class="form-control" id="idioma" name="idioma" placeholder="Ej: Inglés" [(ngModel)]="idioma" >                                             
+                    </div>
+                    <div class="mb-3">
+                    <label for="nivel" class="form-label" >Nivel</label>
+                    <input type="text" formControlName="nivel" class="form-control" id="nivel" name="nivel" placeholder="Ej: Intermedio superior B2" [(ngModel)]="nivel">                                                     
+                    </div>                                         
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Guardar</button>
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+</div>
+<!--MODAL EDITAR -->  
+<div class="modal fade" id="idiModalEdit" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editIdioma">Editar idioma</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>                     
+            <div class="modal-body">                   
+                <form [formGroup]="form" class="m-2" (ngSubmit)="onUpdate()" novalidate #editF="ngForm"> 
+                    <div class="mb-3">
+                    <label for="idioma" class="form-label">Idioma</label>
+                    <input type="text" formControlName="idioma" class="form-control" id="idioma" name="idioma" placeholder="Ej: Inglés" [(ngModel)]="toEdit.idioma" >                                             
+                    </div>
+                    <div class="mb-3">
+                    <label for="nivel" class="form-label" >Nivel</label>
+                    <input type="text" formControlName="nivel" class="form-control" id="nivel" name="nivel" placeholder="Ej: B2" [(ngModel)]="toEdit.nivel">                                                     
+                    </div>                                            
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Guardar</button>
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+</div>
+<!--MODAL ELIMINAR -->  
+<div class="modal fade" id="idiModalDelete" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteIdioma">Desea eliminar el idioma {{toDelete.idioma}}?</h5>          
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div> 
+        <div class="modal-body">
+            Atención! no podrás deshacerlo una vez que se haya borrado.
+          </div>               
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-dark" (click)="onDelete(toDelete.id!)" data-bs-dismiss="modal">Eliminar</button>
+        </div>
+      </div>
+    </div>
+</div> 

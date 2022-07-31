@@ -1,0 +1,127 @@
+<div class="row mt-4">
+    <div class="col-lg-2">
+        <div class="border-top-half"></div>
+        <h3>Experiencia</h3>        
+        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#expModal" *ngIf="isLogged">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+    </div>     
+    <div class="col-lg-10 border-top">
+        <div class="row" *ngFor="let Experiencia of experiencia">
+           <div class="text-end">
+               <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#expModalDelete" *ngIf="isLogged" (click)="onDeleteModal(Experiencia.id!)">
+                   <i class="fa-solid fa-xmark m-2"></i>
+                </button>
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#expModalEdit" *ngIf="isLogged" (click)="onEditModal(Experiencia.id!)">
+                    <i class="fa-solid fa-pencil m-2"></i>
+                </button>                   
+            </div>            
+            <div class="col-md-2">
+                <p>{{Experiencia.periodo}}</p>
+                <img src="{{Experiencia.logo}}" alt="logo institucional" class="logo-institucional">
+            </div>
+            <div class="col-md-10">
+                <h5>{{Experiencia.trabajo}}</h5>
+                <p>{{Experiencia.descripcionTrabajo}}. En {{Experiencia.lugar}}.</p>
+            </div>
+        </div>
+    </div>
+</div>   
+
+<!--MODAL AGREGAR -->
+<div class="modal fade" id="expModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nuevaExperiencia">Agregar una nueva experiencia</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>                     
+            <div class="modal-body">                   
+                <form [formGroup]="form" class="m-2" (ngSubmit)="onAdd()" novalidate #addF="ngForm"> 
+                    <div class="mb-3">
+                    <label for="trabajo" class="form-label" >Trabajo</label>
+                    <input type="text" formControlName="trabajo" class="form-control" id="trabajo" name="trabajo" placeholder="Ej: Arquitecta" [(ngModel)]="trabajo" >                                             
+                    </div>
+                    <div class="mb-3">
+                    <label for="periodo" class="form-label" >Período</label>
+                    <input type="text" formControlName="periodo" class="form-control" id="periodo" name="periodo" placeholder="Ej: 2017-presente" [(ngModel)]="periodo">                                                     
+                    </div> 
+                    <div class="mb-3">
+                        <label for="descripcionTrabajo" class="form-label" >Descripción del trabajo realizado</label>
+                        <textarea type="text" formControlName="descripcionTrabajo" class="form-control" id="descripcionTrabajo" name="descripcionTrabajo" placeholder="Ej: Proyecto, y dirección de vivienda familiar" [(ngModel)]="descripcionTrabajo"></textarea>                                                     
+                    </div>                  
+                    <div class="mb-3">
+                        <label for="lugar" class="form-label" >Institución o empresa</label>
+                        <input type="text" formControlName="lugar" class="form-control" id="lugar" name="lugar" placeholder="Ej: Estudio" [(ngModel)]="lugar">                                                     
+                    </div> 
+                    <div class="mb-3">
+                        <label for="logo" class="form-label">Url del logo de la institución o empresa</label>
+                        <input type="text" formControlName="logo" class="form-control" id="logo" name="logo" placeholder="Ej: http://logo.com" [(ngModel)]="logo">                                                     
+                    </div> 
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-dark" [disabled]="form.invalid" data-bs-dismiss="modal">Guardar</button>
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+<!--MODAL EDITAR -->  
+<div class="modal fade" id="expModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarExperiencia">Editar experiencia</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>                     
+            <div class="modal-body">                   
+                <form [formGroup]="form" class="m-2" (ngSubmit)="onUpdate()" novalidate #editF="ngForm"> 
+                    <div class="mb-3">
+                    <label for="trabajo" class="form-label" >Trabajo</label>
+                    <input type="text" formControlName="trabajo" class="form-control" id="trabajo" name="trabajo" placeholder="Ej: Arquitecta" [(ngModel)]="toEdit.trabajo" >                                             
+                    </div>
+                    <div class="mb-3">
+                    <label for="periodo" class="form-label" >Período</label>
+                    <input type="text" formControlName="periodo" class="form-control" id="periodo" name="periodo" placeholder="Ej: 2015- presente" [(ngModel)]="toEdit.periodo">                                                     
+                    </div> 
+                    <div class="mb-3">
+                        <label for="descripcionTrabajo" class="form-label" >Descripción del trabajo realizado</label>
+                        <textarea type="text" formControlName="descripcionTrabajo" class="form-control" id="descripcionTrabajo" name="descripcionTrabajo" placeholder="Ej: Confección de proyectos, dirección de obra, etc" [(ngModel)]="toEdit.descripcionTrabajo"></textarea>                                                     
+                    </div>
+                    <div class="mb-3">
+                        <label for="lugar" class="form-label" >Institución o empresa</label>
+                        <input type="text" formControlName="lugar" class="form-control" id="lugar" name="lugar" placeholder="Ej: Estudio Arq" [(ngModel)]="toEdit.lugar">                                                     
+                    </div> 
+                    <div class="mb-3">
+                        <label for="logo" class="form-label" >Url del logo de la institución o empresa</label>
+                        <input type="text" formControlName="logo" class="form-control" id="logo" name="logo" placeholder="Ej: http://logo.com" [(ngModel)]="toEdit.logo">                                                     
+                    </div>                       
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Guardar</button>
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--MODAL ELIMINAR -->  
+<div class="modal fade" id="expModalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteExperiencia">Desea eliminar la experiencia {{toDelete.trabajo}}?</h5>          
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div> 
+        <div class="modal-body">
+            Atención! no podrás deshacerlo una vez que se haya borrado
+          </div>               
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-dark" (click)="onDelete(toDelete.id!)" data-bs-dismiss="modal">Eliminar</button>
+        </div>
+      </div>
+    </div>
+</div>          

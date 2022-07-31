@@ -1,0 +1,79 @@
+<section id="about-me">
+    <div class="card container">
+      <img src="{{persona.fotoPortada}}" class="card-img-top" alt="imagen de portada">
+        <div class="card-body d-flex">
+            <div class="row">
+                <div class="col-lg-3 container d-flex justify-content-center">
+                    <div class="w-75 p-3 text-center">
+                        <img src="{{persona.fotoPerfil}}" class="foto-perfil img-fluid" alt="foto perfil">  
+                    </div>                  
+                </div>
+                <div class="col-lg-9">
+                    <div class="text-end">
+                        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#sobreMiModalEdit" *ngIf="isLogged" (click)="onEditModal(persona.id!)">
+                            <p>Editar sección<i class="fa-solid fa-pencil m-2"></i></p>
+                        </button> 
+                    </div>
+                    <h2 class="card-title ml-auto my-2">Hola! soy {{persona.nombre}} {{persona.apellido}}...</h2>
+                    <h4 class="card-subtitle my-2 text-muted">{{persona.sobreMi}}</h4>                  
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted d-flex justify-content-md-around flex-wrap">     
+            <h5 class="d-inline-flex px-4 py-2"><i class="fa-solid fa-laptop-code px-2"></i>{{persona.profesion}}</h5>
+            <h5 class="d-inline-flex px-4 py-2"><i class="fa-solid fa-at px-2"></i>{{persona.email}}</h5>
+            <h5 class="d-inline-flex px-4 py-2"><i class="fa-solid fa-location-dot px-2"></i>{{persona.lugarResidencia}}</h5>               
+        </div>        
+    </div>    
+</section> 
+
+<!--MODAL EDITAR-->
+<div class="modal fade" id="sobreMiModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarSobreMi">Editar sección sobre mi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>                     
+            <div class="modal-body">                   
+                <form [formGroup]="form" class="m-2" (ngSubmit)="onUpdate()" novalidate #editF="ngForm"> 
+                    <div class="mb-3">
+                      <label for="nombre" class="form-label">Nombre</label>
+                      <input type="text" formControlName="nombre" class="form-control" id="nombre" name="nombre" [(ngModel)]="toEdit.nombre">                                             
+                    </div>
+                    <div class="mb-3">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" formControlName="apellido" class="form-control" id="apellido" name="apellido"  [(ngModel)]="toEdit.apellido">                                             
+                    </div>
+                    <div class="mb-3">
+                        <label for="profesion" class="form-label">Profesión</label>
+                        <input type="text" formControlName="profesion" class="form-control" id="profesion" name="profesion"[(ngModel)]="toEdit.profesion">                                             
+                    </div>
+                    <div class="mb-3">
+                        <label for="sobreMi" class="form-label">Sobre Mi</label>
+                        <textarea type="text" formControlName="sobreMi" class="form-control" id="sobreMi" name="sobreMi" [(ngModel)]="toEdit.sobreMi"></textarea>                                               
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="text" formControlName="email" class="form-control" id="email" name="email" [(ngModel)]="toEdit.email">                                             
+                    </div>
+                    <div class="mb-3">
+                        <label for="lugarResidencia" class="form-label">Lugar de residencia</label>
+                        <input type="text" formControlName="lugarResidencia" class="form-control" id="lugarResidencia" name="lugarResidencia" [(ngModel)]="toEdit.lugarResidencia">                                             
+                    </div>
+                    <div class="mb-3">
+                      <label for="fotoPerfil" class="form-label">Foto de perfil</label>
+                      <input type="text" formControlName="fotoPerfil" class="form-control" id="fotoPerfil" name="fotoPerfil"[(ngModel)]="toEdit.fotoPerfil">                                                     
+                    </div>
+                    <div class="mb-3">
+                        <label for="fotoPortada" class="form-label">Foto de portada</label>
+                        <input type="text" formControlName="fotoPortada" class="form-control" id="fotoPortada" name="fotoPortada" [(ngModel)]="toEdit.fotoPortada">                                                     
+                    </div>                    
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Guardar</button>
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+</div>

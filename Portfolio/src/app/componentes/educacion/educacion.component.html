@@ -1,0 +1,119 @@
+<div class="row mt-5">
+    <div class="col-lg-2">
+        <div class="border-top-half"></div>
+        <h3>Educación</h3>       
+        <button type="button" class="btn btn-light" data-bs-toggle="modal" *ngIf="isLogged" data-bs-target="#eduModal">
+            <i class="fa-solid fa-plus"></i>
+        </button>              
+    </div>
+    <div class="col-lg-10 border-top">
+        <div class="row" *ngFor="let Educacion of educaciones">
+            <div>
+                <div class="text-end">
+                    <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#eduModalDelete" *ngIf="isLogged" (click)="onDeleteModal(Educacion.id!)">
+                        <i class="fa-solid fa-xmark m-2"></i>
+                    </button>
+                    <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#eduModalEdit" *ngIf="isLogged" (click)="onEditModal(Educacion.id!)">
+                        <i class="fa-solid fa-pencil m-2"></i>
+                    </button> 
+                </div>
+            </div>
+            <div class="col-md-2">
+                <p>{{Educacion.periodo}}</p>
+                <img src="{{Educacion.logoInstitucion}}" alt="logo institucion o empresa" class="logo-institucional">
+            </div>
+            <div class="col-md-10">
+                <h5>{{Educacion.educacion}}</h5>
+                <p>{{Educacion.institucion}}</p>
+            </div>
+        </div>   
+    </div> 
+</div>
+
+
+<!--MODAL AGREGAR -->
+<div class="modal fade" id="eduModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nuevaEducacion">Agregar una nueva educación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>                     
+            <div class="modal-body">                   
+                <form [formGroup]="form" class="m-2" (ngSubmit)="onAdd()" novalidate #addF="ngForm"> 
+                    <div class="mb-3">
+                    <label for="educacion" class="form-label">Formación</label>
+                    <input type="text" formControlName="educacion" class="form-control" id="educacion" name="educacion" placeholder="Ej: Arquitecta" [(ngModel)]="educacion" >                                             
+                    </div>
+                    <div class="mb-3">
+                    <label for="periodo" class="form-label">Período</label>
+                    <input type="text" formControlName="periodo" class="form-control" id="periodo" name="periodo" placeholder="Ej: 2007-2017" [(ngModel)]="periodo">                                                     
+                    </div> 
+                    <div class="mb-3">
+                        <label for="institucion" class="form-label" >Institución o empresa</label>
+                        <input type="text" formControlName="institucion" class="form-control" id="institucion" name="institucion" placeholder="Ej: Universidad" [(ngModel)]="institucion">                                                     
+                    </div> 
+                    <div class="mb-3">
+                        <label for="logoInstitucion" class="form-label">Url del logo de la institución o empresa</label>
+                        <input type="text" formControlName="logoInstitucion" class="form-control" id="logoInstitucion" name="logoInstitucion" placeholder="Ej: http://logo.com" [(ngModel)]="logoInstitucion">                                                     
+                    </div> 
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-dark" [disabled]="form.invalid" data-bs-dismiss="modal">Guardar</button>
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+  </div> 
+<!--MODAL EDITAR -->  
+<div class="modal fade" id="eduModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarEducacion">Editar educación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>                     
+            <div class="modal-body">                   
+                <form [formGroup]="form" class="m-2" (ngSubmit)="onUpdate()" novalidate #editF="ngForm"> 
+                    <div class="mb-3">
+                    <label for="educacion" class="form-label">Formación</label>
+                    <input type="text" formControlName="educacion" class="form-control" id="educacion" name="educacion" [(ngModel)]="toEdit.educacion" >                                             
+                    </div>
+                    <div class="mb-3">
+                    <label for="periodo" class="form-label" >Período</label>
+                    <input type="text" formControlName="periodo" class="form-control" id="periodo" name="periodo" [(ngModel)]="toEdit.periodo">                                                     
+                    </div> 
+                    <div class="mb-3">
+                        <label for="institucion" class="form-label" >Institución</label>
+                        <input type="text" formControlName="institucion" class="form-control" id="institucion" name="institucion" [(ngModel)]="toEdit.institucion">                                                     
+                    </div>                       
+                    <div class="mb-3">
+                        <label for="logoInstitucion" class="form-label" >Url del logo de la institución o empresa</label>
+                        <input type="text" formControlName="logoInstitucion" class="form-control" id="logoInstitucion" name="logoInstitucion" [(ngModel)]="toEdit.logoInstitucion">                                                     
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-dark" [disabled]="form.invalid" data-bs-dismiss="modal">Guardar</button>
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+</div>
+<!--MODAL ELIMINAR -->  
+<div class="modal fade" id="eduModalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="borrarEducacion">Desea eliminar la educación {{toDelete.educacion}}?</h5>          
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div> 
+        <div class="modal-body">
+            Atención! no podrás deshacerlo una vez que se haya borrado
+          </div>               
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-dark" (click)="onDelete(toDelete.id!)" data-bs-dismiss="modal">Eliminar</button>
+        </div>
+      </div>
+    </div>
+</div>   

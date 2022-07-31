@@ -1,0 +1,101 @@
+<div class="row mt-5">
+    <div class="col-lg-2">
+        <div class="border-top-half"></div>
+        <h3>Hard & Soft skills</h3>
+        <button type="button" class="btn btn-light" data-bs-toggle="modal" *ngIf="isLogged" data-bs-target="#skillModal">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+    </div>        
+    <div class="col-lg-10 border-top">
+        <div class="row" *ngFor="let Skill of skills">
+            <div class="text-end">
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#skillModalDelete" *ngIf="isLogged" (click)="onDeleteModal(Skill.id!)">
+                  <i class="fa-solid fa-xmark m-2"></i>
+                </button>
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#skillModalEdit" *ngIf="isLogged" (click)="onEditModal(Skill.id!)">
+                  <i class="fa-solid fa-pencil m-2"></i>
+                </button> 
+            </div>
+            <div>
+                <div class=" d-flex justify-content-between mt-1">
+                    <h5>{{Skill.skill}}</h5><span>{{Skill.porcentaje}}%</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: {{Skill.porcentaje}}%" aria-valuemin="0" aria-valuemax="100%"></div>
+                </div>                                    
+            </div>             
+        </div>
+    </div>    
+</div>
+
+
+<!--Modal AGREGAR-->
+<div class="modal fade" id="skillModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nuevaSkill">Agregar una Habilidad</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>                     
+            <div class="modal-body">                   
+                <form [formGroup]="form" class="m-2" (ngSubmit)="onAdd()" novalidate #addF="ngForm"> 
+                    <div class="mb-3">
+                    <label for="skill" class="form-label">Habilidad</label>
+                    <input type="text" formControlName="skill" class="form-control" id="skill" name="skill" [(ngModel)]="skill">                                             
+                    </div>
+                    <div class="mb-3">
+                    <label for="porcentaje" class="form-label" >Porcentaje habilidad</label>
+                    <input type="text" formControlName="porcentaje" class="form-control" id="porcentaje" name="porcentaje" [(ngModel)]="porcentaje">                                                     
+                    </div>                                          
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-dark" [disabled]="form.invalid" data-bs-dismiss="modal">Guardar</button>
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+  </div> 
+  <!--MODAL EDITAR-->
+  <div class="modal fade" id="skillModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarSkill">Editar una Habilidad</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>                     
+            <div class="modal-body">                   
+                <form [formGroup]="form" class="m-2" (ngSubmit)="onUpdate()" novalidate #editF="ngForm"> 
+                    <div class="mb-3">
+                      <label for="skill" class="form-label">Habilidad</label>
+                      <input type="text" formControlName="skill" class="form-control" id="skill" name="skill" placeholder="Ej: Word" [(ngModel)]="toEdit.skill" >                                             
+                    </div>
+                    <div class="mb-3">
+                      <label for="porcentaje" class="form-label">Porcentaje habilidad</label>
+                      <input type="text" formControlName="porcentaje" class="form-control" id="porcentaje" name="porcentaje" placeholder="Ej: 75" [(ngModel)]="toEdit.porcentaje">                                                     
+                    </div>                   
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Guardar</button>
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+  </div> 
+  <!--MODAL ELIMINAR -->  
+  <div class="modal fade" id="skillModalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="eliminarProyecto">Desea eliminar la habilidad {{toDelete.skill}}?</h5>        
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div> 
+        <div class="modal-body">
+            Atención! no podrás deshacerlo una vez que se haya borrado.
+          </div>               
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-dark" (click)="onDelete(toDelete.id!)" data-bs-dismiss="modal">Eliminar {{toDelete.skill}}</button>
+        </div>
+      </div>
+    </div>
+  </div> 
