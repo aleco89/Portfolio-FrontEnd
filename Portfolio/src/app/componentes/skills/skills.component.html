@@ -41,11 +41,11 @@
                 <form [formGroup]="form" class="m-2" (ngSubmit)="onAdd()" novalidate #addF="ngForm"> 
                     <div class="mb-3">
                     <label for="skill" class="form-label">Habilidad</label>
-                    <input type="text" formControlName="skill" class="form-control" id="skill" name="skill" [(ngModel)]="skill">                                             
+                    <input type="text" formControlName="skill" class="form-control" placeholder="JavaScript" id="skill" name="skill" [(ngModel)]="skill">                                             
                     </div>
                     <div class="mb-3">
                     <label for="porcentaje" class="form-label" >Porcentaje habilidad</label>
-                    <input type="text" formControlName="porcentaje" class="form-control" id="porcentaje" name="porcentaje" [(ngModel)]="porcentaje">                                                     
+                    <input type="text" formControlName="porcentaje" class="form-control" id="porcentaje" placeholder="80" name="porcentaje" [(ngModel)]="porcentaje">                                                     
                     </div>                                          
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-dark" [disabled]="form.invalid" data-bs-dismiss="modal">Guardar</button>

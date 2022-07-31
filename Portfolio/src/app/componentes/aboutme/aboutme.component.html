@@ -51,7 +51,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="sobreMi" class="form-label">Sobre Mi</label>
-                        <textarea type="text" formControlName="sobreMi" class="form-control" id="sobreMi" name="sobreMi" [(ngModel)]="toEdit.sobreMi"></textarea>                                               
+                        <textarea type="text" formControlName="sobreMi" class="form-control" id="sobreMi" name="sobreMi" [(ngModel)]="toEdit.sobreMi" maxlength="500"></textarea>                                               
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
@@ -62,12 +62,12 @@
                         <input type="text" formControlName="lugarResidencia" class="form-control" id="lugarResidencia" name="lugarResidencia" [(ngModel)]="toEdit.lugarResidencia">                                             
                     </div>
                     <div class="mb-3">
-                      <label for="fotoPerfil" class="form-label">Foto de perfil</label>
-                      <input type="text" formControlName="fotoPerfil" class="form-control" id="fotoPerfil" name="fotoPerfil"[(ngModel)]="toEdit.fotoPerfil">                                                     
+                      <label for="fotoPerfil" class="form-label">Url foto de perfil</label>
+                      <input type="text" formControlName="fotoPerfil" class="form-control" id="fotoPerfil" name="fotoPerfil"[(ngModel)]="toEdit.fotoPerfil" maxlength="500">                                                     
                     </div>
                     <div class="mb-3">
-                        <label for="fotoPortada" class="form-label">Foto de portada</label>
-                        <input type="text" formControlName="fotoPortada" class="form-control" id="fotoPortada" name="fotoPortada" [(ngModel)]="toEdit.fotoPortada">                                                     
+                        <label for="fotoPortada" class="form-label">Url foto de portada</label>
+                        <input type="text" formControlName="fotoPortada" class="form-control" id="fotoPortada" name="fotoPortada" [(ngModel)]="toEdit.fotoPortada" maxlength="500">                                                     
                     </div>                    
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Guardar</button>

@@ -29,7 +29,7 @@ export class EducacionComponent implements OnInit {
       {
         educacion: ['', [Validators.required, Validators.maxLength(45)]],        
         periodo: ['', [Validators.required, Validators.maxLength(45)]], 
-        institucion: ['', [Validators.required, Validators.maxLength(255)]], 
+        institucion: ['', [Validators.required, Validators.maxLength(45)]], 
         logoInstitucion: ['', [Validators.required, Validators.maxLength(500)]],           
       } 
     ); 

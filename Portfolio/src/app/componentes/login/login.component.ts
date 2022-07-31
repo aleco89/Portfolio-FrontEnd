@@ -57,16 +57,4 @@ export class LoginComponent implements OnInit {
 
 }
 
-/*
 
-onUpdate():void{    
-    this.idiomaS.edit(this.toEdit).subscribe({
-      next: data=>{alert("El idioma fue editado con éxito"),
-      this.getIdioma();
-      this.clearForm()},
-      error: err=>{alert("No es posible editar el idioma")}        
-    });
-  }
-  
-
-}*/

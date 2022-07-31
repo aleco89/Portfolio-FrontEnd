@@ -8,12 +8,12 @@ import { Persona } from '../model/persona';
 })
 
 export class PersonaService {
-  url= 'http://localhost:8080/persona';
+  url= 'https://apiargprograma.herokuapp.com/persona';
 
   constructor(private httpClient: HttpClient) { }
 
   public getPerso(): Observable<Persona>{
-    return this.httpClient.get<Persona>(this.url+ '/ver/5');
+    return this.httpClient.get<Persona>(this.url+ '/ver/3');
   }   
 
   public find(id: number):Observable<any>{

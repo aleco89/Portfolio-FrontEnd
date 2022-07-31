@@ -51,11 +51,11 @@
                   </div> 
                   <div class="mb-3">
                       <label for="descripcion" class="form-label" >Descripción del proyecto</label>
-                      <textarea type="text" formControlName="descripcion" class="form-control" id="descripcion" name="descripcion" placeholder="Ej: Proyecto, y dirección de vivienda familiar" [(ngModel)]="descripcion"></textarea>                                                     
+                      <textarea type="text" formControlName="descripcion" class="form-control" id="descripcion" maxlength="500" name="descripcion" placeholder="Ej: Proyecto, y dirección de vivienda familiar" [(ngModel)]="descripcion"></textarea>                                                     
                   </div>                  
                   <div class="mb-3">
                       <label for="foto" class="form-label" >Url de una foto del proyecto</label>
-                      <input type="text" formControlName="foto" class="form-control" id="foto" name="urlFoto" placeholder="Ej: http://logo.com" [(ngModel)]="foto">                                                     
+                      <input type="text" formControlName="foto" class="form-control" id="foto" name="urlFoto" maxlength="500" placeholder="Ej: http://foto.com" [(ngModel)]="foto">                                                     
                   </div>                       
                   <div class="modal-footer">
                       <button type="submit" class="btn btn-dark" [disabled]="form.invalid" data-bs-dismiss="modal">Guardar</button>
@@ -85,11 +85,11 @@
                   </div> 
                   <div class="mb-3">
                       <label for="descripcion" class="form-label" >Descripción del proyecto</label>
-                      <textarea type="text" formControlName="descripcion" class="form-control" id="descripcion" name="descripcion" placeholder="Ej: Confección de proyectos, dirección de obra, etc" [(ngModel)]="toEdit.descripcion"></textarea>                                                     
+                      <textarea type="text" formControlName="descripcion" class="form-control" id="descripcion" maxlength="500" name="descripcion" placeholder="Ej: Confección de proyectos, dirección de obra, etc" [(ngModel)]="toEdit.descripcion"></textarea>                                                     
                   </div>                  
                   <div class="mb-3">
                       <label for="foto" class="form-label" >Url de una foto del proyecto</label>
-                      <input type="text" formControlName="foto" class="form-control" id="foto" name="foto" placeholder="Ej: http://logo.com" [(ngModel)]="toEdit.foto">                                                     
+                      <input type="text" formControlName="foto" class="form-control" id="foto" name="foto" maxlength="500" placeholder="Ej: http://logo.com" [(ngModel)]="toEdit.foto">                                                     
                   </div>                       
                   <div class="modal-footer">
                       <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Guardar</button>

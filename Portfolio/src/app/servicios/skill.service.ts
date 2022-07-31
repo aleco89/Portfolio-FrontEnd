@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SkillService {
-  url= 'http://localhost:8080/skill';
+  url= 'https://apiargprograma.herokuapp.com/skill';
 
   constructor(private httpClient:HttpClient) { }
 

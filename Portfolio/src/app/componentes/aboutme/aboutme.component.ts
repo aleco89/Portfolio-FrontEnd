@@ -10,6 +10,7 @@ import { TokenService } from 'src/app/servicios/token.service';
   templateUrl: './aboutme.component.html',
   styleUrls: ['./aboutme.component.css']
 })
+
 export class AboutmeComponent implements OnInit {
   isLogged=false;
   toEdit: Persona= new Persona("","","","","","","","");

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class IdiomaService {
 
-  url="http://localhost:8080/idioma";
+  url="https://apiargprograma.herokuapp.com/idioma";
 
   constructor(private httpClient: HttpClient) { }
 

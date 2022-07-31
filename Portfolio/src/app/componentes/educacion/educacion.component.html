@@ -50,12 +50,12 @@
                     <input type="text" formControlName="periodo" class="form-control" id="periodo" name="periodo" placeholder="Ej: 2007-2017" [(ngModel)]="periodo">                                                     
                     </div> 
                     <div class="mb-3">
-                        <label for="institucion" class="form-label" >Institución o empresa</label>
+                        <label for="institucion" class="form-label" >Institución</label>
                         <input type="text" formControlName="institucion" class="form-control" id="institucion" name="institucion" placeholder="Ej: Universidad" [(ngModel)]="institucion">                                                     
                     </div> 
                     <div class="mb-3">
-                        <label for="logoInstitucion" class="form-label">Url del logo de la institución o empresa</label>
-                        <input type="text" formControlName="logoInstitucion" class="form-control" id="logoInstitucion" name="logoInstitucion" placeholder="Ej: http://logo.com" [(ngModel)]="logoInstitucion">                                                     
+                        <label for="logoInstitucion" class="form-label">Url del logo de la institución</label>
+                        <input type="text" formControlName="logoInstitucion" class="form-control" id="logoInstitucion" name="logoInstitucion" placeholder="Ej: http://logo.com" [(ngModel)]="logoInstitucion" maxlength="500">                                                     
                     </div> 
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-dark" [disabled]="form.invalid" data-bs-dismiss="modal">Guardar</button>
@@ -89,7 +89,7 @@
                     </div>                       
                     <div class="mb-3">
                         <label for="logoInstitucion" class="form-label" >Url del logo de la institución o empresa</label>
-                        <input type="text" formControlName="logoInstitucion" class="form-control" id="logoInstitucion" name="logoInstitucion" [(ngModel)]="toEdit.logoInstitucion">                                                     
+                        <input type="text" formControlName="logoInstitucion" class="form-control" id="logoInstitucion" maxlength="500" name="logoInstitucion" [(ngModel)]="toEdit.logoInstitucion">                                                     
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-dark" [disabled]="form.invalid" data-bs-dismiss="modal">Guardar</button>

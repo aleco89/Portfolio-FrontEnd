@@ -78,7 +78,8 @@ export class ExperienciaComponent implements OnInit {
   onUpdate():void{    
     this.experienciaS.edit(this.toEdit).subscribe({
       next: data=>{alert("La experiencia fue editado con éxito"),
-      this.getExperiencia()},
+      this.getExperiencia(),
+      this.clearForm()},
       error: err=>{alert("No es posible editar la experiencia")}        
     });
   }
